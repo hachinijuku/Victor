@@ -64,7 +64,7 @@ if [ -e /var/www ]; then
     echo "Backup files in /var/www:"
     echo "#########################"
     echo
-    find /var/www | egrep ~\$\|.bak\$\|.orig\$\|[._]*.s[a-v][a-z]\$\|[._]*.sw[a-p]\$\|[._]s[a-v][a-z]\$\|[._]sw[a-p]\$
+    find /var/www | egrep ~\$\|.bak\$\|.orig\$\|\.s[a-v][a-z]\$\|\.sw[a-p]\$\|\.s[a-v][a-z]\$\|\.sw[a-p]\$
     echo
 else
     echo "#####################"
@@ -72,10 +72,31 @@ else
     echo "#####################"
 fi
 
-# Contents of all .history files
-
 # robots.txt in /var/www and /var/www/html
+echo
+echo "#################"
+echo "Robots.txt files:"
+echo "#################"
+find /var/www/robots.txt
+find /var/www/html/robots.txt
+
 # All htaccess, .htaccess, htpasswd, and .htpasswd in /var/www/...
+echo
+echo "############################"
+echo "htaccess and htpasswd files:"
+echo "############################"
+find /var/www -type f | egrep [\.]htpasswd\$\|[\.]htaccess\$
 
 # All set-user executables  (with dates)
+echo
+echo "#####################"
+echo "Set User Executables:"
+echo "#####################"
+find / -type f -perm -u=s
+
 # All set-group executables  (with dates)
+echo
+echo "######################"
+echo "Set Group Executables:"
+echo "######################"
+find / -type f -perm -g=s
